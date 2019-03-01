@@ -22,9 +22,9 @@ def zip_pdf(x,pi,lmbd):
     '''
     Returns the ZIP probability of each given sample
     '''
-    return poisson_pdf(x,lmbd)+pi*(x>0)
+    return poisson_pdf(x,lmbd)+pi*(x==0)
 
-def zip_random(lmbd, pi, numsamples=1):
+def zip_random(pi, lmbd, numsamples=1):
     '''
     Draws samples from a zero-inflated Poisson (ZIP) distribution
     '''
@@ -44,8 +44,8 @@ class ZIP_EM(object):
         function is to pre-compute all the values associated with this function
         which are needed in the next step.
         '''
-        E_zi = np.divide(pi*(x>0),
-                         pi*(x>0) + (1-pi)*poisson_pdf(x,lmbd)
+        E_zi = np.divide(pi*(x==0),
+                         pi*(x==0) + (1-pi)*poisson_pdf(x,lmbd)
                         )
         return E_zi
 
@@ -83,20 +83,57 @@ class ZIP_EM(object):
         self.likelihood = np.inf
         headers = ["Iter", "Pi", "lmbd", "l", "Error"]
         print(("{:>15}"*len(headers)).format(*headers))
-        i = 1
+        i = 0
         while not self.stop(x, self.pi, self.lmbd):
+            i+=1
             E_zi = self.estep(x, self.pi, self.lmbd)
             self.pi, self.lmbd = self.mstep(x,E_zi)
-            print(("{:>15}"+"{:>15.5f}"*(len(headers)-1)).format(i,self.pi,self.lmbd,self.likelihood,self.error))
-            i+=1
-        return self.pi, self.lmbd
+            print(("{:>15}"+"{:>15.5f}"*(len(headers)-1)).format(i, \
+                        self.pi,self.lmbd,self.likelihood,self.error))
+        return self.pi, self.lmbd, i
 
 if __name__=="__main__":
     solver = ZIP_EM()
-    sample = zip_random(3,0.3,1000)
-    pi, lmbd = solver.run(sample)
+    sample = zip_random(0.3,1.5,1000)
+    solver.run(x=sample,rho=1e-10)
 
-#sample = (zip_random(3,0.3,10000))
-#bins = np.arange(0, max(sample) + 1.5) - 0.5
-#plt.hist(sample,bins)
-#   plt.show()
+    # Let's do some experiments
+
+    # 1. See how the convergence speed changes when we vary the parameter of
+    #    the true distribution
+    iters = []
+    lmbd_range = np.arange(0.25,10,0.25)
+    for lmbd in lmbd_range:
+        sample = zip_random(0.3,lmbd,1000)
+        est_pi, est_lmbd, num_iters = solver.run(x=sample,rho=1e-10)
+        iters.append(num_iters)
+    plt.figure()
+    plt.plot(lmbd_range, iters)
+    plt.title("Convergence speed w.r.t $\lambda$")
+    plt.ylabel("Num of iter until convergence")
+    plt.xlabel("$\lambda$")
+    plt.savefig("convergence_speed_lambda.png")
+
+    # 2. Check the estimate quality for a fixed difficult parameter and a varied
+    #    sample size
+    dists = []
+    lmbd = 1.0
+    ss_range = 10**np.arange(1,5,1)
+    for sample_size in ss_range:
+        sample = zip_random(0.3,lmbd,sample_size)
+        est_pi, est_lmbd, num_iters = solver.run(x=sample,rho=1e-10)
+        dists.append(abs(lmbd-est_lmbd))
+    plt.figure()
+    plt.plot(ss_range, dists)
+    plt.xscale("log")
+    plt.title("$\lambda$ estimate quality w.r.t sample size")
+    plt.ylabel("Abs dist from true $\lambda$")
+    plt.xlabel("Sample size [log]")
+    plt.savefig("estimate_quality_sample_size.png")
+
+# Test the sample pdf function
+#    sample = (zip_random(0.3,10,10000))
+#    bins = np.arange(0, max(sample) + 1.5) - 0.5
+#    plt.hist(sample,bins)
+#    plt.show()
+
