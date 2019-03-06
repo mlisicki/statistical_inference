@@ -1,5 +1,4 @@
 theme: jekyll-theme-cayman
-  - jekyll-theme-slate
 plugins:
   - jekyll-relative-links
 relative_links:
