@@ -1,4 +1,4 @@
-theme: Hydejack
+theme: jekyll-theme-hydejack
 plugins:
   - jekyll-relative-links
 relative_links:
