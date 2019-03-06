@@ -6,5 +6,4 @@ relative_links:
   enabled: true
   collections: true
 include:
-  - STAT6841 - Assignment 2.md
   - README.md
