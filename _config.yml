@@ -1,8 +1,9 @@
-theme: jekyll-theme-cayman
+theme: jekyll-theme-slate
 plugins:
   - jekyll-relative-links
 relative_links:
   enabled: true
   collections: true
+markdown: maruku
 include:
   - README.md
