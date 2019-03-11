@@ -1,10 +1,14 @@
-### STAT6841 Assignment 1
+---
+layout: page
+title: STAT6841 Assignment 1  
+---
+
+## STAT6841 Assignment 1
 
 *Michal Lisicki*
 
 
-
-### (1.) 
+## (1.) 
 
 If $$P(A) = \frac{1}{3}$$ and $$P(\bar{B}) = \frac{1}{4}$$ can $$A$$ and $$B$$ be disjoint? Explain.
 
@@ -24,7 +28,7 @@ $$\blacksquare$$
 
 
 
-### (2.)
+## (2.)
 
 Suppose that a sample space S has n elements. Find the number of subsets that can be formed from the elements of S. Justify your answer.
 
@@ -48,7 +52,7 @@ $$\blacksquare$$
 
 
 
-### (3.) 
+## (3.) 
 
 Let $$X$$ be a continuous random variable with pdf $$f(x)$$ and cdf $$F(x)$$. For a fixed number $$x_0$$, define the function
 $$
@@ -83,14 +87,14 @@ $$\blacksquare$$
 
 
 
-### (4.)
+## (4.)
 
 A certain river floods every year. Suppose that the low-water mark is set at 1 and the high-water mark, denoted by $$Y$$ , has distribution function
 $$
 F_Y(y) = P(Y\leq y)=1-\frac{1}{y^2}, \ 1\leq y < \infty
 $$
 
-#### (a) 
+### (a) 
 
 Verify that $$F_Y (y)$$ is a cdf.
 
@@ -112,7 +116,7 @@ $$\lim_\limits{y\rightarrow \infty} 1-\frac{1}{y^2} = 1 \Rightarrow \lim_\limits
 
 Derivative $$\frac{d F_Y (y)}{d y} = \frac{2}{y^3}$$ is positive on the range $$1\leq y \leq \infty$$ and $$0$$ when it approaches $$\infty$$, so the function is non-decreasing. 
 
-#### (b) 
+### (b) 
 
 Find the pdf, $$f_Y (y)$$, of $$Y$$.
 
@@ -120,7 +124,7 @@ Find the pdf, $$f_Y (y)$$, of $$Y$$.
 
 $$f_Y(y) = \frac{d F_Y (y)}{d y} = \frac{2}{y^3}$$
 
-#### (c) 
+### (c) 
 
 If the low-water mark is reset at 0, and we use a unit of measurement that is $$\frac{1}{10}$$ of that given previously, the high-water mark becomes $$Z = 10(Y-1)$$. Find the $$F_Z(z)$$.
 
@@ -140,7 +144,7 @@ $$
 
 
 
-### (5.)
+## (5.)
 
 Let $$X_1$$ and $$X_2$$ be independent exponential ($$\lambda$$) distributed random variables.
 
@@ -150,7 +154,7 @@ Exponential distribution is given as $$f_X(x) = \lambda e^{-\lambda x}$$,	$$0\le
 
 Then from the independence assumption we have $$f_X(x_1,x_2) = \lambda^2 e^{-\lambda (x_1+x_2)}$$.
 
-#### (a) 
+### (a) 
 
 Find the joint density of $$Z_1 = \frac{X_1}{X_1+X_2}$$, $$Z_2=X_1+X_2$$.
 
@@ -220,7 +224,7 @@ f_Z(z_1,z_2) &= f_X(h_1(z_1,z_2),h_2(z_1,z_2))|J_x| \\
 $$
 $$\blacksquare$$
 
-#### (b) 
+### (b) 
 
 Show that $$Z_1$$ and $$Z_2$$ are independent.
 
@@ -268,7 +272,7 @@ f_{Z_1}(z_1)f_{Z_2}(z_2) = \lambda^2 z_2 e^{-\lambda z_2} = f_{Z_1,Z_2}(z_1,z_2)
 $$
 $$\blacksquare$$
 
-#### (c) 
+### (c) 
 
 Use the following result
 $$
@@ -288,7 +292,7 @@ $$\blacksquare$$
 
 
 
-### (6.)
+## (6.)
 
 Suppose that $$X$$ is a random variable with pdf $$f_\theta(x) = \frac{\theta}{x^{\theta+1}},\ \theta>0$$ for $$x\geq 1$$. For what values of $$\theta$$ such that $$E(X)$$ and $$var(X)$$ exist.
 
@@ -326,7 +330,7 @@ So in overall $$\theta \in \mathcal{R}\backslash \{1,2\}$$
 
 
 
-### (7.)
+## (7.)
 
  Suppose $$X_1,...,X_n$$ is a random sample from $$X$$ with pdf $$f(x)$$ and cdf $$F(x)$$. Let $$X_{(1)} \leq X_{(2)} \leq...\leq X_{(n)} \leq$$ be the order statistics. 
 
