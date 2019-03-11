@@ -8,7 +8,7 @@ title: STAT6841 Assignment 1
 *Michal Lisicki*
 
 
-## (1.) 
+## aaa(1.) 
 
 If $$P(A) = \frac{1}{3}$$ and $$P(\bar{B}) = \frac{1}{4}$$ can $$A$$ and $$B$$ be disjoint? Explain.
 
