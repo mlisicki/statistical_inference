@@ -42,7 +42,7 @@ Then:
 $$
 \begin{align}
 P(\lim_\limits{n\rightarrow \infty} \|Y^n-0\|<\epsilon) &= P(\lim_\limits{n\rightarrow \infty} \|Y^n\|<\epsilon) \\
-&= P(\lim_\limits{n\rightarrow \infty} Y^n<\epsilon) & \text{($$Y$$ always positive)} \\
+&= P(\lim_\limits{n\rightarrow \infty} Y^n<\epsilon) & \text{(Y always positive)} \\
 &= P(\lim_\limits{n\rightarrow \infty} Y<\epsilon^{\frac{1}{n}}) \\
 &= \lim_\limits{n\rightarrow \infty} \int_\limits{0}^{\epsilon^{\frac{1}{n}}} 1 dy \\
 &= \lim_\limits{n\rightarrow \infty} y \bigg\|_0^{\epsilon^{\frac{1}{n}}} \\
@@ -55,7 +55,7 @@ $$\hspace{400pt}\blacksquare$$
 
 
 
-##(2.)
+## (2.)
 
 Consider $$X_1,...X_n \sim Bernoulli(p),\ 0 < p < 1$$ unknown. Write the pdf in terms of
 natural parameters and from that, find the MLEs of $$p$$.
