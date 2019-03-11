@@ -1,9 +1,8 @@
 ---
-layout: page
-title: STAT6841 Assignment 1  
+layout: default
+title: STAT6841 Assignment 1
+description: Michal Lisicki
 ---
-
-*Michal Lisicki*
 
 
 ## **(1.)** 
