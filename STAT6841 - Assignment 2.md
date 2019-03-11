@@ -1,6 +1,6 @@
 ---
 layout: default
-title: STAT6841 Assignment 2
+title: STAT6841 - Assignment 2
 description: Michal Lisicki
 ---
 
@@ -13,9 +13,9 @@ Let $$Y\sim \text{Uniform}[0,1]$$, and let $$X_n=Y^n$$. Prove that $$X_n\rightar
 
 - Almost sure convergence:
 
-  $$\forall \epsilon$$ we have $$P(\lim_\limits{n\rightarrow \infty} |X_n-X|<\epsilon)=1$$, which is stronger than a regular convergence in probability defined as $$\lim_\limits{n\rightarrow \infty} P(|X_n-X|<\epsilon)=1$$. 
+$$\forall \epsilon$$ we have $$P(\lim_\limits{n\rightarrow \infty} \|X_n-X\|<\epsilon)=1$$, which is stronger than a regular convergence in probability defined as $$\lim_\limits{n\rightarrow \infty} P(\|X_n-X\|<\epsilon)=1$$. 
 
-  We denote it as: $$X_n \xrightarrow{a.s.} X$$.
+We denote it as: $$X_n \xrightarrow{a.s.} X$$.
 
 - Uniform distr:
 
@@ -41,11 +41,11 @@ Then:
 
 $$
 \begin{align}
-P(\lim_\limits{n\rightarrow \infty} |Y^n-0|<\epsilon) &= P(\lim_\limits{n\rightarrow \infty} |Y^n|<\epsilon) \\
+P(\lim_\limits{n\rightarrow \infty} \|Y^n-0\|<\epsilon) &= P(\lim_\limits{n\rightarrow \infty} \|Y^n\|<\epsilon) \\
 &= P(\lim_\limits{n\rightarrow \infty} Y^n<\epsilon) & \text{($$Y$$ always positive)} \\
 &= P(\lim_\limits{n\rightarrow \infty} Y<\epsilon^{\frac{1}{n}}) \\
 &= \lim_\limits{n\rightarrow \infty} \int_\limits{0}^{\epsilon^{\frac{1}{n}}} 1 dy \\
-&= \lim_\limits{n\rightarrow \infty} y \bigg|_0^{\epsilon^{\frac{1}{n}}} \\
+&= \lim_\limits{n\rightarrow \infty} y \bigg\|_0^{\epsilon^{\frac{1}{n}}} \\
 &= \lim_\limits{n\rightarrow \infty} \epsilon^{\frac{1}{n}} \\
 &= 1
 \end{align}
@@ -90,7 +90,7 @@ $$
 which is in the exponential family parametrized by $$p$$ if we assume $$a(p) = \log\frac{p}{1-p}$$ , $$b(x)=x$$, $$c(x)=0$$ and $$d(p) = \log(1+e^{a(p)})$$. The regularity conditions of MLE are satisfied for all exponential family distributions, and so we can proceed with a solution for a regular case, i.e. finding the parameters for which the score function is equal to zero:
 
 $$
-S(p) = \frac{\part}{\part p} l(p) = 0
+S(p) = \frac{\partial}{\partial p} l(p) = 0
 $$
 
 In our case the likelihood is just a product of distributions of independent samples:
@@ -102,7 +102,7 @@ $$
 We can now use a property of exponential family distributions that:
 
 $$
- \frac{\part}{\part \theta} l(\theta) = 0 \iff t_k = E(T_k)
+ \frac{\partial}{\partial \theta} l(\theta) = 0 \iff t_k = E(T_k)
 $$
 
 where $$t_k = \sum_\limits{i=0}^n b_k(x_i)$$ and $$T=\sum_\limits{i=0}^n b_k(X_i)$$. In our case $$K=1$$, so looking at the likelihood equation above we have $$t=\sum_\limits{i=1}^n x_i$$ and $$T = \sum_\limits{i=1}^n X_i$$. Then:
@@ -484,20 +484,20 @@ $$
 
 $$
 \begin{align}
-\frac{\part l}{\part p} &=  \frac{(x_1+x_3)}{p} - \frac{n_1+n_3-x_1-x_3}{1-p} + \frac{x_2}{p+a} -\frac{n_2-x_2}{1-p-a} 
+\frac{\partial l}{\partial p} &=  \frac{(x_1+x_3)}{p} - \frac{n_1+n_3-x_1-x_3}{1-p} + \frac{x_2}{p+a} -\frac{n_2-x_2}{1-p-a} 
 \end{align}
 $$
 
 
 $$
 \begin{align}
-\frac{\part l}{\part a} = \frac{x_2}{p+a}-\frac{(n_2-x_2)}{1-p-a }
+\frac{\partial l}{\partial a} = \frac{x_2}{p+a}-\frac{(n_2-x_2)}{1-p-a }
 \end{align}
-
 $$
+
 To find MLE we need to solve the following system of equations:
-$$
 
+$$
 \begin{align}
 &\begin{cases}
 \frac{(x_1+x_3)}{p} - \frac{n_1+n_3-x_1-x_3}{1-p} + \frac{x_2}{p+a} -\frac{n_2-x_2}{1-p-a}  &= 0 \\
@@ -553,20 +553,20 @@ $$var(\hat{\tau})\geq \frac{[\tau'(\theta)]^2}{nJ(\theta)}$$
 
 Or in other form:
 
-$$var_{\theta}(T(X)) \geq \frac{(\frac{d}{d\theta} E_\theta T(X))^2}{n E_\theta (( \frac{\part}{\part \theta} \log f(X|\theta))^2)}$$
+$$var_{\theta}(T(X)) \geq \frac{(\frac{d}{d\theta} E_\theta T(X))^2}{n E_\theta (( \frac{\partial}{\partial \theta} \log f(X|\theta))^2)}$$
 
-where $$E_\theta=E_{X|\theta}$$ and $$n$$ is for iid case
+where $$E_\theta=E_{X\|\theta}$$ and $$n$$ is for iid case
 
 *Fisher Information*
 
-$$J(\theta)=-E[\frac{\part^2 \log f}{\part \theta^2}]$$
+$$J(\theta)=-E[\frac{\partial^2 \log f}{\partial \theta^2}]$$
 
 *CRLB attainment condition*
 
 If $$T(X)=T(X_1,...,X_n)$$ is any unbiased estimator of $$\tau(\theta)$$ then $$T(X)$$ attains the CRLB iff:
 
 $$
-a(\theta) [T(X)-\tau(\theta)] = \frac{\part}{\part \theta} \log L(\theta|X)
+a(\theta) [T(X)-\tau(\theta)] = \frac{\partial}{\partial \theta} \log L(\theta|X)
 $$
 
 for some function $$a(\theta)$$. 
@@ -597,7 +597,7 @@ $$
 
 $$
 \begin{align}
-\frac{\part^2 \log f}{\part p^2} &= \frac{\part^2}{\part p^2}\log p+ x\log(1-p) \\
+\frac{\partial^2 \log f}{\partial p^2} &= \frac{\partial^2}{\partial p^2}\log p+ x\log(1-p) \\
 &= \frac{d}{dp} \frac{1}{p} -\frac{x}{1-p} \\
 &= -\frac{1}{p^2}-\frac{x}{(1-p)^2} \\
 \end{align}
@@ -605,7 +605,7 @@ $$
 
 $$
 \begin{align}
-E_X\bigg[\frac{\part^2 \log f}{\part p^2}\bigg] &= -E \bigg[-\frac{1}{p^2}-\frac{x}{(1-p)^2} \bigg] \\
+E_X\bigg[\frac{\partial^2 \log f}{\partial p^2}\bigg] &= -E \bigg[-\frac{1}{p^2}-\frac{x}{(1-p)^2} \bigg] \\
 &=\frac{1}{p^2}+\frac{E[x]}{(1-p)^2} \\
 &= \frac{1}{p^2}+\frac{1}{(1-p)^2}\frac{1-p}{p} \\
 &= \frac{1}{p^2}+\frac{1}{p(1-p)} \\
@@ -630,7 +630,7 @@ Is there a function of $$p$$ for which there exists an unbiased estimator the va
 The equality on CRLB holds only if:
 
 $$
-S(\theta) = \sum_\limits{i=1}^n \frac{\part}{\part \theta} \log f_\theta(x_i) = K(\theta,n) [\tau(T(X_1,...,X_n)) - \tau(\theta)]
+S(\theta) = \sum_\limits{i=1}^n \frac{\partial}{\partial \theta} \log f_\theta(x_i) = K(\theta,n) [\tau(T(X_1,...,X_n)) - \tau(\theta)]
 $$
 
 **Solution**
@@ -639,7 +639,7 @@ From the previous section our estimator $$\tau(p)=\frac{1-p}{p}$$. Then:
 
 $$
 \begin{align}
-\sum_\limits{i=1}^n \frac{\part}{\part p} \log f_p(x_i) &= \sum_\limits{i=1}^n \frac{\part}{\part p} \log p+ x_i\log(1-p) \\
+\sum_\limits{i=1}^n \frac{\partial}{\partial p} \log f_p(x_i) &= \sum_\limits{i=1}^n \frac{\partial}{\partial p} \log p+ x_i\log(1-p) \\
 &= \sum_\limits{i=1}^n \frac{1}{p} -\frac{x_i}{1-p} \\
 &= -\frac{1}{1-p} \bigg( \sum_\limits{i=1}^n x_i -\frac{1-p}{p} \bigg) \\
 &=\frac{n}{p-1} \bigg( \frac{\sum_\limits{i=1}^n x_i}{n} -\frac{1-p}{p} \bigg) \\
