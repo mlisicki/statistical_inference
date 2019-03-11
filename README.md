@@ -5,6 +5,12 @@ This site is a collection of my solutions to various statistical and related mat
 
 A big chunk of those exercises currently comes from the Computational Statistical Inference course at the U of Guelph.
 
+#### Table of contents
+
+[Assignment 1](./STAT6841%20-%20Assignment%201.html)
+
+#### MathJax support
+
 Below is a simple test of MathJax:
 
 In N-dimensional simplex noise, the squared kernel summation radius $r^2$ is $\frac 1 2$
