@@ -13,9 +13,9 @@ Let $$Y\sim \text{Uniform}[0,1]$$, and let $$X_n=Y^n$$. Prove that $$X_n\rightar
 
 - Almost sure convergence:
 
-$$\forall \epsilon$$ we have $$P(\lim_\limits{n\rightarrow \infty} \|X_n-X\|<\epsilon)=1$$, which is stronger than a regular convergence in probability defined as $$\lim_\limits{n\rightarrow \infty} P(\|X_n-X\|<\epsilon)=1$$. 
+  $$\forall \epsilon$$ we have $$P(\lim_\limits{n\rightarrow \infty} \|X_n-X\|<\epsilon)=1$$, which is stronger than a regular convergence in probability defined as $$\lim_\limits{n\rightarrow \infty} P(\|X_n-X\|<\epsilon)=1$$. 
 
-We denote it as: $$X_n \xrightarrow{a.s.} X$$.
+  We denote it as: $$X_n \xrightarrow{a.s.} X$$.
 
 - Uniform distr:
 
@@ -315,7 +315,7 @@ f(z_i|x_i,\lambda^{(0)},\pi^{(0)}) &=\frac{f(z_i,x_i|\lambda^{(0)},\pi^{(0)})}{f
 \end{align}
 $$
 
-Note that the denominator is simply what we agreed is $$f(x|\pi,\lambda)$$ at the beginning of the section.
+Note that the denominator is simply what we agreed is $$f(x\|\pi,\lambda)$$ at the beginning of the section.
 
 Then because $$z_i \sim Binomial(p)$$ we have:
 
