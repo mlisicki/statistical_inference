@@ -9,6 +9,8 @@ A big chunk of those exercises currently comes from the Computational Statistica
 
 [Assignment 1](./STAT6841%20-%20Assignment%201.html)
 
+[Assignment 2](./STAT6841%20-%20Assignment%202.html)
+
 #### MathJax support
 
 Below is a simple test of MathJax:
