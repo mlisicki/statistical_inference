@@ -1,5 +1,5 @@
-# statistical_inference
-Computational Statistical Inference
+# Computational Statistical Inference
+By Michal Lisicki
 
 This site is a collection of my solutions to various statistical and related mathematical problems.
 
