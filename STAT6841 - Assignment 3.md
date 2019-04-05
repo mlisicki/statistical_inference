@@ -5,22 +5,29 @@
 ## (1.)
 
 Individuals are given a measurable stimulus, to which they may or may not respond. Let $$X$$ be the quantitative measure of the stimulus. Given the stimulus is $$x$$, the probability of an individual responding is $$\pi(x)$$ where
+
 $$
 \pi(x) = \frac{e^{\beta_0+\beta_1 x}}{1+e^{\beta_0+\beta_1 x}}
 $$
+
 where $$\beta_0​$$ and $$\beta_1​$$ are fixed but unknown parameters. The experiment is conducted for $$K​$$ groups of individuals. For each group, say the $$k​$$th group, $$n_k​$$ individuals were given stimulus $$x_k​$$ and $$r_k​$$ individuals responded out of $$n_k​$$ individuals, for $$k = 1,..., K​$$. Find the MLEs of $$\beta_0​$$ and $$\beta_1​$$. Outline the procedure to get the solutions of MLEs.
 
 **Solution**
 
 An experiment conducted on a subset of individual with success / failure responses can be modelled by a binomial distribution:
+
 $$
 f(r_k; n_k, \pi_k) = {n_k \choose r_k} \pi_k^{r_k} (1-\pi_k)^{n_k-r_k}
 $$
+
 with probability of the response defined as above:
+
 $$
 \pi(x) = \frac{e^{\beta_0+\beta_1 x}}{1+e^{\beta_0+\beta_1 x}}
 $$
+
 By substituting for $$\pi(x)$$ this can be also written as:
+
 $$
 \begin{align}
 f(r_k; n_k, x_k, \beta_0, \beta_1) &= {n_k \choose r_k} \bigg(\frac{e^{\beta_0+\beta_1 x_k}}{1+e^{\beta_0+\beta_1 x_k}}\bigg)^{r_k} \bigg(1-\frac{e^{\beta_0+\beta_1 x_k}}{1+e^{\beta_0+\beta_1 x_k}}\bigg)^{n_k-r_k} \\
@@ -29,10 +36,13 @@ f(r_k; n_k, x_k, \beta_0, \beta_1) &= {n_k \choose r_k} \bigg(\frac{e^{\beta_0+\
 $$
 
 Then the likelihood of all the experiments can be written simply as:
+
 $$
 L(\beta_0,\beta_1; r_k, n_k, x_k) = \prod_{k=1}^K {n_k \choose r_k} \bigg(\frac{e^{\beta_0+\beta_1 x_k}}{1+e^{\beta_0+\beta_1 x_k}}\bigg)^{r_k} \bigg(\frac{1}{1+e^{\beta_0+\beta_1 x_k}}\bigg)^{n_k-r_k}
 $$
+
 Then the log-likelihood is:
+
 $$
 \begin{align}
 l(\beta_0,\beta_1; r_k, n_k, x_k) &= \sum_{k=1}^K \bigg[ \log {n_k \choose r_k} +r_k\log\bigg(\frac{e^{\beta_0+\beta_1 x_k}}{1+e^{\beta_0+\beta_1 x_k}}\bigg) +(n_k-r_k)\log\bigg(\frac{1}{1+e^{\beta_0+\beta_1 x_k}}\bigg) \bigg] \\
@@ -40,17 +50,23 @@ l(\beta_0,\beta_1; r_k, n_k, x_k) &= \sum_{k=1}^K \bigg[ \log {n_k \choose r_k} 
 &= \sum_{k=1}^K \bigg[ \log {n_k \choose r_k} +r_k(\beta_0+\beta_1 x_k)-n_k\log(1+e^{\beta_0+\beta_1 x_k}) \bigg]
 \end{align}
 $$
+
 To simplify the estimation, in a case of logistic regression, we can define a link function as:
+
 $$
 g(\pi_k) = \eta_k = \log \bigg[\frac{\pi_k}{(1-\pi_k)}\bigg] = \sum_{i=0}^p x_{ki}\beta_i
 $$
+
 where $$p$$ is the number of parameters minus the intercept, in our case $$p=1$$, and we define $$x_{k0}=1$$ to simplify the notation.
 
 We can then rewrite the log-likelihood as:
+
 $$
 l(\beta_0,\beta_1; r_k, n_k, x_k) = \sum_{k=1}^K \bigg[ \log {n_k \choose r_k} +r_k\eta_k-n_k\log(1+e^{\eta_k}) \bigg]
 $$
+
 And the utilize the chain rule to compute the derivatives:
+
 $$
 \begin{align}
 \frac{\partial l}{\partial \beta_i} &= \sum_{k=1}^K \frac{d l}{d \eta_k}\frac{\eta_k}{\beta_i} \\
@@ -58,7 +74,9 @@ $$
 \frac{\partial \eta_k}{\partial\beta_i} &= x_{ki}
 \end{align}
 $$
+
 which utilizes the simplifying substitution we can make for $$\pi_k​$$. Then putting it back together we have the score function specified as:
+
 $$
 \begin{align}
 S(\beta_i) &= \frac{\partial l}{\partial \beta_i} \\
@@ -66,19 +84,25 @@ S(\beta_i) &= \frac{\partial l}{\partial \beta_i} \\
  &= \mathbf{x}_i^T (\mathbf{r} - \boldsymbol{\mu}) 
 \end{align}
 $$
+
 where $$\mu_k = n_k\pi_k​$$. We can also write it in a full matrix form as:
+
 $$
 S(\boldsymbol\beta) = \mathbf{X}^T (\mathbf{r} - \boldsymbol\mu)
 $$
 
 Or using the result above, $$S(\eta_k) = \frac{dl_k}{d\eta_k} =  r_k - n_k \pi_k = r_k-\mu_k$$, we can also write it as:
+
 $$
 S(\boldsymbol\beta) = \mathbf{X}^T S(\boldsymbol\eta)
 $$
+
 If we were to set the derivatives to zero we would notice that the emerging system of equations doesn't have a closed form solution, and therefore we have to resort to iterative methods, like Newton-Raphson:
+
 $$
 0 = S(\hat{\boldsymbol\beta}) = S(\boldsymbol\beta^{(0)}) + H(\boldsymbol\beta^{(0)})(\hat{\boldsymbol\beta}-\boldsymbol\beta^{(0)})
 $$
+
 where $S(\boldsymbol\beta) = (\frac{\partial l}{\partial \beta_1},...,\frac{\partial l}{\partial \beta_p})^T​$ and $H(\boldsymbol\beta) ={\begin{bmatrix}
 \frac{\partial^2 l}{\partial \beta_1^2} & ... & \frac{\partial^2 l}{\partial \beta_1 \beta_p}\\
 ... & ... & ... \\
@@ -86,14 +110,19 @@ where $S(\boldsymbol\beta) = (\frac{\partial l}{\partial \beta_1},...,\frac{\par
 \end{bmatrix}} ​$
 
 with the following update rule:
+
 $$
 \boldsymbol\beta^{(j+1)} = \boldsymbol\beta^{(j)} - H^{-1} (\boldsymbol\beta^{(j)}) S(\boldsymbol\beta^{(j)})
 $$
+
 where in a case of log-likelihood the Hessian can be interpreted as a negative observed information matrix. So that the rule becomes:
+
 $$
 \boldsymbol\beta^{(j+1)} = \boldsymbol\beta^{(j)} + J^{-1} (\boldsymbol\beta^{(j)}) S(\boldsymbol\beta^{(j)})
 $$
+
 And the elements of that matrix are derived as follows:
+
 $$
 \begin{align}
 -\frac{\partial l^2}{\partial\beta_i\beta_j} 
@@ -107,11 +136,15 @@ $$
 &= \sum_{k=1}^K x_{ki} J(\eta_k) x_{kj} \\
 \end{align}
 $$
+
 Which in algebraic form can be written as:
+
 $$
 J(\boldsymbol\beta) = \mathbf{X}^T J(\boldsymbol\eta) \mathbf{X}
 $$
+
 Now we have all the necessary components to break down the update rule:
+
 $$
 \begin{align}
 \boldsymbol\beta^{(j+1)} &= \boldsymbol\beta^{(j)} + J^{-1} (\boldsymbol\beta^{(j)}) S(\boldsymbol\beta^{(j)}) \\
@@ -121,18 +154,25 @@ $$
 (\mathbf{X}^T J(\boldsymbol\eta^{(j)}) \mathbf{X}) \boldsymbol\beta^{(j+1)} &= \mathbf{X}^T J(\boldsymbol\eta^{(j)}) [\boldsymbol\eta^{(j)} + J^{-1}(\boldsymbol\eta^{(j)})S(\boldsymbol\eta^{(j)})] \\
 \end{align}
 $$
+
 If we substitute:
+
 $$
 \mathbf{Z}^{(j)} = \hat{\boldsymbol\eta}^{(j)} + J^{(-1)}(\hat{\boldsymbol\eta}^{(j)})S(\hat{\boldsymbol\eta}^{(j)})
 $$
+
 and
+
 $$
 \mathbf{W}^{(j)} = J(\hat{\boldsymbol\eta}^{(j)})
 $$
+
 This gives the update rule of the Iterative Reweighted Least Squares method:
+
 $$
 \boldsymbol\beta^{(j+1)} = (\mathbf{X}^T\mathbf{W}^{(j)}\mathbf{X})^{-1}\mathbf{X}^T\mathbf{W}^{(j)}\mathbf{Z}^{(j)}
 $$
+
 with weights $$\mathbf{W}$$ and working response $$\mathbf{Z}$$. Solving this algorithm iteratively gives us the MLE.
 
 
@@ -146,6 +186,7 @@ Suppose that $$Y$$ is a random variable represent the number of eggs laid by a p
 $$X \sim \text{Binomial}(n,p)$$
 
 $$Y\sim \text{Poisson}(\mu)$$
+
 $$
 \begin{align}
 f(x,y;p,\mu) &= f(x|y)f(y) \\
@@ -154,14 +195,19 @@ f(x,y;p,\mu) &= f(x|y)f(y) \\
 $$
 
 From which follows the likelihood:
+
 $$
 L(p,\mu;x,y) = \prod_{i=1}^n {y_i\choose x_i} p^{x_i}(1-p)^{y_i-x_i} \frac{e^{-\mu}\mu^{y_i}}{y_i!}
 $$
+
 And the log-likelihood:
+
 $$
 l(p,\mu;x,y) = \sum_{i=1}^n \bigg[ \log {y_i\choose x_i} + x_i\log p+ (y_i-x_i) \log (1-p) -\mu +y_i\log\mu - \log y_i! \bigg]
 $$
+
 To find MLE we set the derivatives to zero:
+
 $$
 \begin{align}
 &\begin{cases}
