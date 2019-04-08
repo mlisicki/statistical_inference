@@ -11,3 +11,5 @@ A big chunk of those exercises currently comes from the Computational Statistica
 [Assignment 2](./STAT6841%20-%20Assignment%202.html)
 
 [Assignment 3](./STAT6841%20-%20Assignment%203.html)
+
+[Assignment 4](./STAT6841%20-%20Assignment%204.html)
