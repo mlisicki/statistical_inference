@@ -152,7 +152,7 @@ $\theta = P(X>3) = \int_3^\infty f(x) dx = \int_{-\infty}^\infty I_A(x) f(x) dx 
 
 where we set $\phi(x) = I_A(x)$ and $A = \{x: x>3\}$.
 
-We need a function $g(x)​$ that is easier to sample from and similar in behavior to $f(x)​$. To keep things simple, we can try $g(x) = \frac{c}{(x-2)^2}​$. The constant $c​$ is a scalar, which ensures that $g(x)​$ represents a proper density, i.e. $\int_{-\infty}^\infty g(x) dx =1​$. In our case as $\int_3^\infty \frac{1}{(x-2)^2} dx = -\frac{1}{x-2} \bigg|_3^\infty​$ already equals 1 we can set $c=1​$.
+We need a function $g(x)​$ that is easier to sample from and similar in behavior to $f(x)​$. To keep things simple, we can try $g(x) = \frac{c}{(x-2)^2}​$. The constant $c​$ is a scalar, which ensures that $g(x)​$ represents a proper density, i.e. $\int_{-\infty}^\infty g(x) dx =1​$. In our case as $\int_3^\infty \frac{1}{(x-2)^2} dx = -\frac{1}{x-2} \bigg\|_3^\infty​$ already equals 1 we can set $c=1​$.
 
 Now, instead of using Monte Carlo integration to approximate $\theta$ as
 
@@ -269,9 +269,9 @@ to generate a Metropolis-Hastings MCMC to estimate $\mu​$. Try different value
 
 Proposal distribution:
 
-$q(\mu^t|\mu^{t-1}) = \frac{1}{\sqrt{2\pi}\tau} \exp\{-\frac{(\mu^t-\mu^{t-1})^2}{2\tau^2}\}​$ 
+$q(\mu^t\|\mu^{t-1}) = \frac{1}{\sqrt{2\pi}\tau} \exp\{-\frac{(\mu^t-\mu^{t-1})^2}{2\tau^2}\}​$ 
 
-$q(\mu^{t-1}|\mu^t) = \frac{1}{\sqrt{2\pi}\tau} \exp\{-\frac{(\mu^t-\mu^{t-1})^2}{2\tau^2}\}​$
+$q(\mu^{t-1}\|\mu^t) = \frac{1}{\sqrt{2\pi}\tau} \exp\{-\frac{(\mu^t-\mu^{t-1})^2}{2\tau^2}\}​$
 
 Target distribution:
 
