@@ -385,6 +385,7 @@ A $N(\mu_0,\sigma_0^2)$ prior is considered for $\mu$ and a Gamma($\alpha,\beta$
 **Solution**
 
 *Priors*
+
 $$
 p_\mu(\mu;\mu_0,\sigma_0^2) = \frac{e^{-(\mu-\mu_0)^2/2\sigma_0^2}}{\sqrt{2\pi\sigma_0^2}},\quad \mu\in\mathbb{R}
 $$
